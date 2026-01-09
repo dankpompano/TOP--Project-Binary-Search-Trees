@@ -3,27 +3,37 @@ class Tree
 
   def initialize(array)
     @array = array
-    @node = Node.new
     @root = build_tree(array)
   end
 
   def build_tree(array)
-    midpoint = array.length / 2
-    array.sort!.uniq!
-    root = @node.data(array[midpoint])
-
+    if(array.length == 0)
+      return nil
+    end
     
-    while(queue != nil)
-      if(start < midpoint)
-        
-      left_mid = 
-      @node.left = 
+    array.sort!.uniq!
+    midpoint = (array.length - 1) / 2
+    root = Node.new(array[midpoint])
+    queue = [[0, array.length - 1, root]]    
+
+    while(!queue.empty?)
+      st, en, current = queue.shift
+      mid = (st + en) / 2
+      if(st < mid) 
+        mid_left = (st + mid - 1) / 2
+        left_node = Node.new(array[mid_left])
+        current.left = left_node #link it
+        queue.push([left_node, st, mid - 1])
       end
 
-      if(array.length > midpoint)
-        @node.right = 
+      if(en > mid)
+        mid_right = (mid + 1 + en) / 2
+        right_node = Node.new(array[mid_right])
+        current.right = right_node #link it
+        queue.push([right_node, mid + 1, en])      
       end
     end
+    return root
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
