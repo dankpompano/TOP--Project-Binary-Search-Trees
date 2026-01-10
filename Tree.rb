@@ -42,4 +42,33 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
+  def insert(root, val)
+    temp = Node.new(val)
+
+    if(root.empty?)
+      return nil
+    end
+
+    curr = root
+    while(curr != nil)
+      if(val < curr.data && curr.left != nil)
+        curr = curr.left
+      elsif(val > curr.data && curr.right != nil)
+        curr = curr.right
+      else
+        break
+      end
+    end
+
+    if(curr.data < temp)
+      curr.left = temp
+    elsif(curr.data > temp)
+        curr.right = temp
+    end
+  end
+
+  def delete(val)
+    
+  end
+
 end
