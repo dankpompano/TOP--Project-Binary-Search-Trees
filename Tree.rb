@@ -67,7 +67,7 @@ class Tree
     end
   end
 
-  
+
   def delete(root, val)
     if(root.empty?)
       return nil
@@ -86,7 +86,7 @@ class Tree
       end
       return root if curr.nil?
         
-      # STEP 2: Node with 0 or 1 child
+      #Node with 0 or 1 child
     if curr.left.nil? || curr.right.nil?
       child = curr.left.nil? ? curr.right : curr.left
 
@@ -104,7 +104,7 @@ class Tree
       return root
     end
 
-    # STEP 3: Node with 2 children
+    #Node with 2 children
     successor_parent = curr
     successor = curr.right
 
@@ -124,5 +124,4 @@ class Tree
     root
     end
   end
-
 end
