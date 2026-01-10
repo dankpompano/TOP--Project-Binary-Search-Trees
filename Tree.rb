@@ -67,8 +67,62 @@ class Tree
     end
   end
 
-  def delete(val)
+  
+  def delete(root, val)
+    if(root.empty?)
+      return nil
+    end
+
+    parent = nil
+    curr = root
     
+    #find the node
+    while(curr != nil && curr.data != val)
+      parent = curr
+      if(val < curr.data)
+        curr = curr.left
+      else
+        curr = curr.right
+      end
+      return root if curr.nil?
+        
+      # STEP 2: Node with 0 or 1 child
+    if curr.left.nil? || curr.right.nil?
+      child = curr.left.nil? ? curr.right : curr.left
+
+      # deleting root
+      if parent.nil?
+        return child
+      end
+
+      if parent.left == curr
+        parent.left = child
+      else
+        parent.right = child
+      end
+
+      return root
+    end
+
+    # STEP 3: Node with 2 children
+    successor_parent = curr
+    successor = curr.right
+
+    while successor.left != nil
+      successor_parent = successor
+      successor = successor.left
+    end
+
+    curr.data = successor.data
+
+    if successor_parent.left == successor
+      successor_parent.left = successor.right
+    else
+      successor_parent.right = successor.right
+    end
+
+    root
+    end
   end
 
 end
